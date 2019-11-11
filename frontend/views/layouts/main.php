@@ -9,74 +9,82 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="en" />
+    <title>Городская транспортная сеть</title>
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
+<div class="container" id="page">
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+    <a href="<?=Url::toRoute('/')?>">
+        <div id="header">
+            <div id="logo"><!--Городская транспортная сеть--></div>
+        </div></a>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <div id="mainmenu">
+
+        <ul>
+            <? $url = Yii::getAlias("@web").'/images'?>
+            <li>
+                <a href="<?=Url::toRoute('site/line')?>" title="Line"><span class="" style="background-image: url(<?=$url?>/line.png)"></span><!--Маршрут--></a>
+            </li>
+            <li>
+                <a href="<?=Url::toRoute('site/station')?>" title="Station"><span style="background-image: url(<?=$url?>/station.png)"></span><!--Остановка--></a>
+            </li>
+            <li>
+                <a href="<?=Url::toRoute('site/vehicle')?>" title="Vehicle"><span style="background-image: url(<?=$url?>/vehicle.png)"></span><!--Транспорт--></a>
+            </li>
+            <li>
+                <a href="<?=Url::toRoute('site/driver')?>" title="Driver"><span style="background-image: url(<?=$url?>/driver.png)"></span><!--Водитель--></a>
+            </li>
+            <li>
+                <a href="<?=Url::toRoute('site/xml')?>" title="XML-XSD"><span style="background-image: url(<?=$url?>/xml.png)"></span><!--XML Schema--></a>
+            </li>
+            <li>
+                <a href="<?=Url::toRoute('site/user')?>" title="User"><span style="background-image: url(<?=$url?>/user.png)"></span><!--User--></a>
+            </li>
+        </ul>
+
+        <!-- Login / Logout -->
+        <div id='access'>
+            <div>
+                <?
+                if (Yii::$app->user->isGuest) {
+                    echo Html::a('Зарегистрироваться', '/site/signup').'<br>'.
+                    Html::a('Войти', '/site/login');
+                } else {
+                        echo Html::beginForm(['/site/logout'], 'post')
+                        . Html::submitButton(
+                            'Выйти (' . Yii::$app->user->identity->username . ')',
+                            ['class' => 'btn btn-link logout']
+                        )
+                        . Html::endForm();
+                }
+                ?>
+            </div>
+        </div>
     </div>
-</div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
+    <?=$content?>
+    <div class="clear"></div>
+    <div id="footer">
+        <ul>
+            <li class="sitemap"><a href="#">Карта сайта</a></li>
+            <li class="copyr"><a href="#">Copyright &copy; 2018 ГТС</a></li>
+            <li class="allright"><a href="#">Все права сохранены <br>ГТС</a></li>
+        </ul>
+    </div><!-- footer -->
 <?php $this->endBody() ?>
 </body>
 </html>
