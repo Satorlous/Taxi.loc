@@ -82,11 +82,6 @@ class SiteController extends Controller
         return $this->render('driver');
     }
 
-    public function actionLine()
-    {
-        return $this->render('line');
-    }
-
 
     public function actionStation()
     {

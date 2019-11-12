@@ -38,7 +38,7 @@ AppAsset::register($this);
         <ul>
             <? $url = Yii::getAlias("@web").'/images'?>
             <li>
-                <a href="<?=Url::toRoute('site/line')?>" title="Line"><span class="" style="background-image: url(<?=$url?>/line.png)"></span><!--Маршрут--></a>
+                <a href="<?=Url::toRoute('line/index')?>" title="Line"><span class="" style="background-image: url(<?=$url?>/line.png)"></span><!--Маршрут--></a>
             </li>
             <li>
                 <a href="<?=Url::toRoute('site/station')?>" title="Station"><span style="background-image: url(<?=$url?>/station.png)"></span><!--Остановка--></a>
@@ -76,7 +76,9 @@ AppAsset::register($this);
             </div>
         </div>
     </div>
+    <div style="margin: 15px 10px 0 5px">
         <?=$content?>
+    </div>
     <div class="clear"></div>
     <div id="footer">
         <ul>

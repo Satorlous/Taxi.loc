@@ -7,25 +7,25 @@ use yii\widgets\ActiveForm;
 /* @var $model frontend\models\Line */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+    <div class="line-form">
 
-<div class="line-form">
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+        <?= $form->field($model, 'code')->textInput(['maxlength' => true])->label('Название') ?>
 
-    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'start_time_operation')->textInput()->label('Время начала работы') ?>
 
-    <?= $form->field($model, 'start_time_operation')->textInput() ?>
+        <?= $form->field($model, 'end_time_operation')->textInput()->label('Время конца работы') ?>
 
-    <?= $form->field($model, 'end_time_operation')->textInput() ?>
+        <?= $form->field($model, 'type')->textInput(['maxlength' => true])->label('Тип транспорта') ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'map')->textInput(['maxlength' => true])->label('Карта маршрута') ?>
 
-    <?= $form->field($model, 'map')->textInput(['maxlength' => true]) ?>
+        <div class="form-group">
+            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?php ActiveForm::end(); ?>
+
     </div>
 
-    <?php ActiveForm::end(); ?>
-
-</div>

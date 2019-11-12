@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /* @var $model frontend\models\Line */
 
 $this->title = 'Create Line';
-$this->params['breadcrumbs'][] = ['label' => 'Lines', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="line-create">
 

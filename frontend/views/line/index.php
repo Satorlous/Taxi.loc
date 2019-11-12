@@ -7,15 +7,15 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\LineSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Lines';
+$this->title = 'Маршруты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="line-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="float-right"><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Line', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать маршрут', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,15 +25,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'code',
-            'start_time_operation',
-            'end_time_operation',
-            'type',
-            //'map',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'header' => 'Название',
+                'attribute' => 'code',
+            ],
+            [
+                'header' => 'Время начала работы',
+                'attribute' => 'start_time_operation',
+            ],
+            [
+                'header' => 'Время конца работы',
+                'attribute' => 'end_time_operation',
+            ],
+            [
+                'header' => 'Тип',
+                'attribute' => 'type',
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['width' => '70'],
+                'template' => '{view} {update} {delete} {link}',
+            ],
         ],
     ]); ?>
 

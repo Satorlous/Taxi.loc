@@ -7,8 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\Line */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Lines', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="line-view">
@@ -16,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Подтвердите действие!',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,13 +28,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'code',
-            'start_time_operation',
-            'end_time_operation',
-            'type',
-            'map',
+            [
+                'label' => 'Код',
+                'attribute' => 'id',
+            ],
+            [
+                'label' => 'Название',
+                'attribute' => 'code',
+            ],
+            [
+                'label' => 'Время начала работы',
+                'attribute' => 'start_time_operation',
+            ],
+            [
+                'label' => 'Время конца работы',
+                'attribute' => 'end_time_operation',
+            ],
+            [
+                'label' => 'Тип',
+                'attribute' => 'type',
+            ],
+            [
+                'label' => 'Карта маршрута',
+                'attribute' => 'map',
+            ],
         ],
+        'template' => '<tr><th>{label}</th><td style="width:60%;">{value}</td></tr>',
     ]) ?>
 
 </div>

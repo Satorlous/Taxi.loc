@@ -5,11 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Line */
 
-$this->title = 'Update Line: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Lines', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменение маршрута: ' . $model->code;
 ?>
+
 <div class="line-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
