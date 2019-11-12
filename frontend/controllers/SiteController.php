@@ -90,7 +90,7 @@ class SiteController extends Controller
 
     public function actionStation()
     {
-        return $this->render('stationtest');
+        return $this->render('station');
     }
 
     public function actionUser()
