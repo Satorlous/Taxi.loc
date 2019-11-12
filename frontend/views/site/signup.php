@@ -16,7 +16,7 @@ $this->title = 'Регистрация';
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Логин') ?>
+                <?= $form->field($model, 'username')->textInput()->label('Логин') ?>
 
                 <?= $form->field($model, 'email')->label('E-Mail') ?>
 

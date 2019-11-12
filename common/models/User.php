@@ -18,6 +18,9 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property string $birth_date
+ * @property string $gender
+ * @property string $name
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -27,7 +30,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-
 
     /**
      * {@inheritdoc}

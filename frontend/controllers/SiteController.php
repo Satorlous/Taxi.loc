@@ -90,12 +90,20 @@ class SiteController extends Controller
 
     public function actionStation()
     {
-        return $this->render('station');
+        return $this->render('stationtest');
     }
 
     public function actionUser()
     {
-        return $this->render('user');
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            Yii::$app->session->setFlash('success', 'Спасибо за регистрацию!');
+            return $this->goHome();
+        }
+
+        return $this->render('user', [
+            'model' => $model,
+        ]);
     }
 
     public function actionVehicle()

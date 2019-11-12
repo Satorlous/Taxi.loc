@@ -1,11 +1,11 @@
 <?php
 
-use yii\db\Migration;
+use \yii\db\Migration;
 
 /**
  * Handles the creation of table `{{%driver}}`.
  */
-class m191111_180012_create_driver_table extends Migration
+class m191111_180030_create_driver_table extends Migration
 {
     /**
      * {@inheritdoc}

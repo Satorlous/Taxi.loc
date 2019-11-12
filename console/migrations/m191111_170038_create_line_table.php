@@ -1,11 +1,11 @@
 <?php
 
-use yii\db\Migration;
+use \yii\db\Migration;
 
 /**
  * Handles the creation of table `{{%line}}`.
  */
-class m191111_180038_create_line_table extends Migration
+class m191111_170038_create_line_table extends Migration
 {
     /**
      * {@inheritdoc}
