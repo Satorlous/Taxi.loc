@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Line */
 
-$this->title = 'Create Line';
+$this->title = 'Новый маршрут';
 ?>
 <div class="line-create">
 

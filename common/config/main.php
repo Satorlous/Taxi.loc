@@ -9,5 +9,8 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'VarDumper' => [
+            'class' => 'Symfony\Component\VarDumper\VarDumper',
+        ],
     ],
 ];

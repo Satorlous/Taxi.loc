@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use Symfony\Component\VarDumper\VarDumper;
 use Yii;
 use frontend\models\Line;
 use frontend\models\LineSearch;
@@ -44,6 +45,18 @@ class LineController extends Controller
         ]);
     }
 
+    public function getVehicleTypes($id)
+    {
+        $types = ['Автобус', 'Трамвай', 'Маршрутное такси'];
+        $available_types = [];
+        foreach ($types as $type)
+        {
+            if (Line::find()->where(['id' => $id, 'type' => $type])->count() < 10)
+                $available_types[$type] = $type;
+        }
+        return $available_types;
+    }
+
     /**
      * Displays a single Line model.
      * @param integer $id
@@ -65,12 +78,16 @@ class LineController extends Controller
     public function actionCreate()
     {
         $model = new Line();
-
+        $avts = [
+            'Автобус' => 'Автобус',
+            'Трамвай' => 'Трамвай',
+            'Маршрутное такси' => 'Маршрутное такси',
+        ];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('create', [
+            'avts' => $avts,
             'model' => $model,
         ]);
     }
