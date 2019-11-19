@@ -16,7 +16,6 @@ use yii\widgets\ActiveForm;
         $time .= $i.':00:00';
         $time_arr[$time] = $time;
     }
-    VarDumper::dump($avts);
 ?>
     <div class="line-form">
 

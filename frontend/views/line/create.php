@@ -13,6 +13,7 @@ $this->title = 'Новый маршрут';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'avts' => $avts,
     ]) ?>
 
 </div>

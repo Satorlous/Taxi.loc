@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $position_station
  * @property int $line_id
  *
  * @property Line $line
@@ -33,7 +32,6 @@ class Station extends \yii\db\ActiveRecord
             [['line_id'], 'default', 'value' => null],
             [['line_id'], 'integer'],
             [['name'], 'string', 'max' => 80],
-            [['position_station'], 'string', 'max' => 15],
             [['line_id'], 'exist', 'skipOnError' => true, 'targetClass' => Line::class, 'targetAttribute' => ['line_id' => 'id']],
         ];
     }
@@ -46,7 +44,6 @@ class Station extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'position_station' => 'Position Station',
             'line_id' => 'Line ID',
         ];
     }

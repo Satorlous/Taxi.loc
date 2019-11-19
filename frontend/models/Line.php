@@ -33,9 +33,11 @@ class Line extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['code', 'start_time_operation', 'end_time_operation', 'type', 'map',], 'required'],
             [['start_time_operation', 'end_time_operation'], 'safe'],
             [['code', 'map'], 'string', 'max' => 50],
             [['type'], 'string', 'max' => 30],
+            ['code', 'unique'],
         ];
     }
 

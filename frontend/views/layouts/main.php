@@ -41,13 +41,13 @@ AppAsset::register($this);
                 <a href="<?=Url::toRoute('line/index')?>" title="Line"><span class="" style="background-image: url(<?=$url?>/line.png)"></span><!--Маршрут--></a>
             </li>
             <li>
-                <a href="<?=Url::toRoute('site/station')?>" title="Station"><span style="background-image: url(<?=$url?>/station.png)"></span><!--Остановка--></a>
+                <a href="<?=Url::toRoute('station/index')?>" title="Station"><span style="background-image: url(<?=$url?>/station.png)"></span><!--Остановка--></a>
             </li>
             <li>
-                <a href="<?=Url::toRoute('site/vehicle')?>" title="Vehicle"><span style="background-image: url(<?=$url?>/vehicle.png)"></span><!--Транспорт--></a>
+                <a href="<?=Url::toRoute('vehicle/index')?>" title="Vehicle"><span style="background-image: url(<?=$url?>/vehicle.png)"></span><!--Транспорт--></a>
             </li>
             <li>
-                <a href="<?=Url::toRoute('site/driver')?>" title="Driver"><span style="background-image: url(<?=$url?>/driver.png)"></span><!--Водитель--></a>
+                <a href="<?=Url::toRoute('driver/index')?>" title="Driver"><span style="background-image: url(<?=$url?>/driver.png)"></span><!--Водитель--></a>
             </li>
             <li>
                 <a href="<?=Url::toRoute('site/xml')?>" title="XML-XSD"><span style="background-image: url(<?=$url?>/xml.png)"></span><!--XML Schema--></a>

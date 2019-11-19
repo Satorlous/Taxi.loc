@@ -2,18 +2,18 @@
 
 namespace frontend\controllers;
 
-use Symfony\Component\VarDumper\VarDumper;
+use frontend\models\StationSearch;
 use Yii;
-use frontend\models\Line;
-use frontend\models\LineSearch;
+use frontend\models\Station;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LineController implements the CRUD actions for Line model.
+ * StationController implements the CRUD actions for Station model.
  */
-class LineController extends Controller
+class StationController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +31,12 @@ class LineController extends Controller
     }
 
     /**
-     * Lists all Line models.
+     * Lists all Station models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new LineSearch();
+        $searchModel = new StationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,23 +45,8 @@ class LineController extends Controller
         ]);
     }
 
-    public function getVehicleTypes()
-    {
-        $types = [
-            'Автобус' => 'Автобус',
-            'Трамвай' => 'Трамвай',
-            'Маршрутное такси' => 'Маршрутное такси'];
-//        $available_types = [];
-//        foreach ($types as $type)
-//        {
-//            if (Line::find()->where(['id' => $id, 'type' => $type])->count() < 10)
-//                $available_types[$type] = $type;
-//        }
-        return $types;
-    }
-
     /**
-     * Displays a single Line model.
+     * Displays a single Station model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -74,24 +59,25 @@ class LineController extends Controller
     }
 
     /**
-     * Creates a new Line model.
+     * Creates a new Station model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Line();
+        $model = new Station();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
         return $this->render('create', [
-            'avts' => $this->getVehicleTypes(),
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Line model.
+     * Updates an existing Station model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,13 +92,12 @@ class LineController extends Controller
         }
 
         return $this->render('update', [
-            'avts' => $this->getVehicleTypes(),
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing Line model.
+     * Deletes an existing Station model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -126,15 +111,15 @@ class LineController extends Controller
     }
 
     /**
-     * Finds the Line model based on its primary key value.
+     * Finds the Station model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Line the loaded model
+     * @return Station the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Line::findOne($id)) !== null) {
+        if (($model = Station::findOne($id)) !== null) {
             return $model;
         }
 

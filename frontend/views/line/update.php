@@ -14,6 +14,7 @@ $this->title = 'Изменение маршрута: ' . $model->code;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'avts' => $avts,
     ]) ?>
 
 </div>
