@@ -27,7 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             ['attribute' => 'name','label' => 'Название'],
             ['attribute' => 'lineName','label' => 'Маршрут', 'value'=>'line.code'],
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['width' => '50'],
+                'template' => '{update} {delete} {link}',
+            ],
         ],
     ]); ?>
 

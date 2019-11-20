@@ -12,13 +12,14 @@ use Yii;
  * @property string $birth_date
  * @property string $email
  * @property string $phone
- * @property string $avatar
  * @property int $vehicle_id
- *
+ * @property string $avatar
  * @property Vehicle $vehicle
  */
 class Driver extends \yii\db\ActiveRecord
 {
+    public $avatarFile;
+
     /**
      * {@inheritdoc}
      */
@@ -36,10 +37,12 @@ class Driver extends \yii\db\ActiveRecord
             [['birth_date'], 'safe'],
             [['vehicle_id'], 'default', 'value' => null],
             [['vehicle_id'], 'integer'],
+            [['avatar'], 'string'],
+            [['avatarFile'], 'string'],
             [['name'], 'string', 'max' => 45],
-            [['email', 'avatar'], 'string', 'max' => 50],
+            [['email'], 'string', 'max' => 50],
             [['phone'], 'string', 'max' => 40],
-            [['vehicle_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vehicle::className(), 'targetAttribute' => ['vehicle_id' => 'id']],
+            [['vehicle_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vehicle::class, 'targetAttribute' => ['vehicle_id' => 'id']],
         ];
     }
 
@@ -64,6 +67,6 @@ class Driver extends \yii\db\ActiveRecord
      */
     public function getVehicle()
     {
-        return $this->hasOne(Vehicle::className(), ['id' => 'vehicle_id']);
+        return $this->hasOne(Vehicle::class, ['id' => 'vehicle_id']);
     }
 }

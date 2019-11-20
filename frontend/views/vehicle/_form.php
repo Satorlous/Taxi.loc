@@ -12,16 +12,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Название') ?>
 
-    <?= $form->field($model, 'capacity')->textInput() ?>
+    <?= $form->field($model, 'capacity')->textInput()->label('Вместимость') ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'type')->dropDownList($types, ['prompt' => 'Выберите тип'])->label('Тип транспорта') ?>
 
-    <?= $form->field($model, 'line_id')->textInput() ?>
+    <?= $form->field($model, 'line_id')->dropDownList([])->label('Маршрут') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

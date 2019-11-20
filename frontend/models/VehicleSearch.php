@@ -11,6 +11,7 @@ use frontend\models\Vehicle;
  */
 class VehicleSearch extends Vehicle
 {
+    public $lineName;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +19,7 @@ class VehicleSearch extends Vehicle
     {
         return [
             [['id', 'capacity', 'line_id'], 'integer'],
-            [['name', 'type'], 'safe'],
+            [['name', 'type', 'lineName'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class VehicleSearch extends Vehicle
      */
     public function search($params)
     {
-        $query = Vehicle::find();
+        $query = Vehicle::find()->joinWith(['line']);;
 
         // add conditions that should always apply here
 
@@ -48,23 +49,26 @@ class VehicleSearch extends Vehicle
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['lineName'] = [
+            'asc' => [Line::tableName().'.code' => SORT_ASC],
+            'desc' => [Line::tableName().'.code' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'capacity' => $this->capacity,
-            'line_id' => $this->line_id,
+            'line_id' => $this->lineName,
         ]);
 
         $query->andFilterWhere(['ilike', 'name', $this->name])
-            ->andFilterWhere(['ilike', 'type', $this->type]);
+            ->andFilterWhere(['ilike', 'type', $this->type])
+            ->andFilterWhere(['ilike', Line::tableName().'.code', $this->lineName]);
 
         return $dataProvider;
     }

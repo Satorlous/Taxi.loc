@@ -51,12 +51,6 @@ class LineController extends Controller
             'Автобус' => 'Автобус',
             'Трамвай' => 'Трамвай',
             'Маршрутное такси' => 'Маршрутное такси'];
-//        $available_types = [];
-//        foreach ($types as $type)
-//        {
-//            if (Line::find()->where(['id' => $id, 'type' => $type])->count() < 10)
-//                $available_types[$type] = $type;
-//        }
         return $types;
     }
 
@@ -109,6 +103,13 @@ class LineController extends Controller
             'avts' => $this->getVehicleTypes(),
             'model' => $model,
         ]);
+    }
+
+
+    public function actionTest()
+    {
+        $lines = Line::find()->where(['type' => 'Автобус'])->all();
+        VarDumper::dump($lines);
     }
 
     /**

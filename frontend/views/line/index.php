@@ -26,25 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'header' => 'Название',
+                'label' => 'Название',
                 'attribute' => 'code',
             ],
             [
-                'header' => 'Время начала работы',
+                'label' => 'Время начала работы',
                 'attribute' => 'start_time_operation',
             ],
             [
-                'header' => 'Время конца работы',
+                'label' => 'Время конца работы',
                 'attribute' => 'end_time_operation',
             ],
             [
-                'header' => 'Тип',
+                'label' => 'Тип',
                 'attribute' => 'type',
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'headerOptions' => ['width' => '70'],
-                'template' => '{view} {update} {delete} {link}',
+                'headerOptions' => ['width' => '50'],
+                'template' => '{update} {delete} {link}',
             ],
         ],
     ]); ?>

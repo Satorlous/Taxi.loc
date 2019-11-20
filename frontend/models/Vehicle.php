@@ -34,8 +34,9 @@ class Vehicle extends \yii\db\ActiveRecord
         return [
             [['capacity', 'line_id'], 'default', 'value' => null],
             [['capacity', 'line_id'], 'integer'],
+            [['name', 'type', 'capacity', 'line_id'], 'required'],
             [['name', 'type'], 'string', 'max' => 30],
-            [['line_id'], 'exist', 'skipOnError' => true, 'targetClass' => Line::className(), 'targetAttribute' => ['line_id' => 'id']],
+            [['line_id'], 'exist', 'skipOnError' => true, 'targetClass' => Line::class, 'targetAttribute' => ['line_id' => 'id']],
         ];
     }
 

@@ -2,21 +2,21 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Line;
+use frontend\models\DriverForm;
+use frontend\models\SignupForm;
 use Yii;
-use frontend\models\Vehicle;
-use frontend\models\VehicleSearch;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
+use frontend\models\Driver;
+use frontend\models\DriverSearch;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
- * VehicleController implements the CRUD actions for Vehicle model.
+ * DriverController implements the CRUD actions for Driver model.
  */
-class VehicleController extends Controller
+class DriverController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -34,12 +34,12 @@ class VehicleController extends Controller
     }
 
     /**
-     * Lists all Vehicle models.
+     * Lists all Driver models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new VehicleSearch();
+        $searchModel = new DriverSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,17 +48,8 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function getVehicleTypes()
-    {
-        $types = [
-            'Автобус' => 'Автобус',
-            'Трамвай' => 'Трамвай',
-            'Маршрутное такси' => 'Маршрутное такси'];
-        return $types;
-    }
-
     /**
-     * Displays a single Vehicle model.
+     * Displays a single Driver model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -71,26 +62,29 @@ class VehicleController extends Controller
     }
 
     /**
-     * Creates a new Vehicle model.
+     * Creates a new Driver model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Vehicle();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model = new DriverForm();
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $model->avatar = UploadedFile::getInstance($model, 'avatar');
+            if($model->saveform())
+            {
+                $model->upload();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-
         return $this->render('create', [
             'model' => $model,
-            'types' => $this->getVehicleTypes(),
         ]);
     }
 
     /**
-     * Updates an existing Vehicle model.
+     * Updates an existing Driver model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,26 +100,11 @@ class VehicleController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'types' => $this->getVehicleTypes(),
         ]);
     }
 
-    public function actionLines()
-    {
-        $lines = [];
-        $type = Yii::$app->request->post('val');
-        $lines = Line::find()->where(['type' => $type])->orderBy('code')->all();
-        $av_lines = [];
-        foreach($lines as $line)
-            if(count($line->vehicles) < 10)
-                $av_lines[] = $line;
-        return Json::encode(ArrayHelper::map($av_lines, 'id', 'code'));
-    }
-
-
-
     /**
-     * Deletes an existing Vehicle model.
+     * Deletes an existing Driver model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -139,15 +118,15 @@ class VehicleController extends Controller
     }
 
     /**
-     * Finds the Vehicle model based on its primary key value.
+     * Finds the Driver model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Vehicle the loaded model
+     * @return Driver the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Vehicle::findOne($id)) !== null) {
+        if (($model = Driver::findOne($id)) !== null) {
             return $model;
         }
 

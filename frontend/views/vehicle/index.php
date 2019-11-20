@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\VehicleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Vehicles';
+$this->title = 'Транспортные средства';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vehicle-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать ТС', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,16 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'capacity',
-            'type',
-            'line_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+                ['class' => 'yii\grid\SerialColumn'],
+                ['attribute' => 'name','label' => 'Название'],
+                ['label' => 'Вместимость', 'attribute'=>'capacity', 'headerOptions' => ['width' => '50']],
+                ['label' => 'Тип', 'attribute'=>'type', 'headerOptions' => ['width' => '150']],
+                ['attribute' => 'lineName','label' => 'Маршрут', 'value'=>'line.code'],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'headerOptions' => ['width' => '50'],
+                    'template' => '{update} {delete} {link}',
+                ],
+            ],
     ]); ?>
 
 

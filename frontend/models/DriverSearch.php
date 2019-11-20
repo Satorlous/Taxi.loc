@@ -4,22 +4,21 @@ namespace frontend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Station;
+use frontend\models\Driver;
 
 /**
- * StationSearch represents the model behind the search form of `frontend\models\Station`.
+ * DriverSearch represents the model behind the search form of `frontend\models\Driver`.
  */
-class StationSearch extends Station
+class DriverSearch extends Driver
 {
-    public $lineName;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'line_id'], 'integer'],
-            [['name', 'lineName'], 'safe'],
+            [['id', 'vehicle_id'], 'integer'],
+            [['name', 'birth_date', 'email', 'phone', 'avatar'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class StationSearch extends Station
      */
     public function search($params)
     {
-        $query = Station::find()->joinWith(['line']);
+        $query = Driver::find();
 
         // add conditions that should always apply here
 
@@ -49,26 +48,25 @@ class StationSearch extends Station
             'query' => $query,
         ]);
 
-        $dataProvider->sort->attributes['lineName'] = [
-            'asc' => [Line::tableName().'.code' => SORT_ASC],
-            'desc' => [Line::tableName().'.code' => SORT_DESC],
-        ];
-
         $this->load($params);
 
         if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'line_id' => $this->line_id,
+            'birth_date' => $this->birth_date,
+            'vehicle_id' => $this->vehicle_id,
         ]);
 
-
-        $query
-            ->andFilterWhere(['ilike', 'name', $this->name])
-            ->andFilterWhere(['ilike', Line::tableName().'.code', $this->lineName]);
+        $query->andFilterWhere(['ilike', 'name', $this->name])
+            ->andFilterWhere(['ilike', 'email', $this->email])
+            ->andFilterWhere(['ilike', 'phone', $this->phone])
+            ->andFilterWhere(['ilike', 'avatar', $this->avatar]);
 
         return $dataProvider;
     }
