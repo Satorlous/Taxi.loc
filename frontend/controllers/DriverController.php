@@ -16,22 +16,8 @@ use yii\web\UploadedFile;
 /**
  * DriverController implements the CRUD actions for Driver model.
  */
-class DriverController extends Controller
+class DriverController extends BehaviorController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Driver models.
@@ -68,11 +54,12 @@ class DriverController extends Controller
      */
     public function actionCreate()
     {
-        $model = new DriverForm();
+        $model = new Driver();
         if ($model->load(Yii::$app->request->post()))
         {
-            $model->avatar = UploadedFile::getInstance($model, 'avatar');
-            if($model->saveform())
+            $model->avatarFile = UploadedFile::getInstance($model, 'avatar');
+            $model->avatar = $model->avatarFile->baseName.'.'.$model->avatarFile->extension;
+            if($model->save())
             {
                 $model->upload();
                 return $this->redirect(['view', 'id' => $model->id]);

@@ -13,22 +13,9 @@ use yii\filters\VerbFilter;
 /**
  * StationController implements the CRUD actions for Station model.
  */
-class StationController extends Controller
+class StationController extends BehaviorController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all Station models.

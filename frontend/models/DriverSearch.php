@@ -11,6 +11,7 @@ use frontend\models\Driver;
  */
 class DriverSearch extends Driver
 {
+    public $vehicleName;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +19,7 @@ class DriverSearch extends Driver
     {
         return [
             [['id', 'vehicle_id'], 'integer'],
-            [['name', 'birth_date', 'email', 'phone', 'avatar'], 'safe'],
+            [['name', 'birth_date', 'email', 'phone', 'avatar', 'vehicleName'], 'safe'],
         ];
     }
 
@@ -48,6 +49,11 @@ class DriverSearch extends Driver
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['vehicleName'] = [
+            'asc' => [Vehicle::tableName().'.name' => SORT_ASC],
+            'desc' => [Vehicle::tableName().'.name' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -66,6 +72,7 @@ class DriverSearch extends Driver
         $query->andFilterWhere(['ilike', 'name', $this->name])
             ->andFilterWhere(['ilike', 'email', $this->email])
             ->andFilterWhere(['ilike', 'phone', $this->phone])
+            ->andFilterWhere(['ilike', Vehicle::tableName().'.name', $this->vehicleName])
             ->andFilterWhere(['ilike', 'avatar', $this->avatar]);
 
         return $dataProvider;

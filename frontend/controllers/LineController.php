@@ -13,22 +13,9 @@ use yii\filters\VerbFilter;
 /**
  * LineController implements the CRUD actions for Line model.
  */
-class LineController extends Controller
+class LineController extends BehaviorController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all Line models.

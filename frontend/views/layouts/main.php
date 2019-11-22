@@ -62,8 +62,7 @@ AppAsset::register($this);
             <div>
                 <?
                 if (Yii::$app->user->isGuest) {
-                    echo Html::a('Зарегистрироваться', '/site/signup').'<br>'.
-                    Html::a('Войти', '/site/login');
+                    echo Html::a('Войти', '/site/login');
                 } else {
                         echo Html::beginForm(['/site/logout'], 'post')
                         . Html::submitButton(

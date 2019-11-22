@@ -38,7 +38,7 @@ class Driver extends \yii\db\ActiveRecord
             [['vehicle_id'], 'default', 'value' => null],
             [['vehicle_id'], 'integer'],
             [['avatar'], 'string'],
-            [['avatarFile'], 'string'],
+            [['avatarFile'], 'file'],
             [['name'], 'string', 'max' => 45],
             [['email'], 'string', 'max' => 50],
             [['phone'], 'string', 'max' => 40],
@@ -53,12 +53,12 @@ class Driver extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'birth_date' => 'Birth Date',
-            'email' => 'Email',
-            'phone' => 'Phone',
-            'avatar' => 'Avatar',
-            'vehicle_id' => 'Vehicle ID',
+            'name' => 'ФИО',
+            'birth_date' => 'Дата рождения',
+            'email' => 'E-Mail',
+            'phone' => 'Телефон',
+            'avatar' => 'Аватара',
+            'vehicle_id' => 'ТС',
         ];
     }
 
@@ -68,5 +68,10 @@ class Driver extends \yii\db\ActiveRecord
     public function getVehicle()
     {
         return $this->hasOne(Vehicle::class, ['id' => 'vehicle_id']);
+    }
+
+    public function upload()
+    {
+        $this->avatarFile->saveAs("uploads/{$this->avatarFile->baseName}.{$this->avatarFile->extension}");
     }
 }

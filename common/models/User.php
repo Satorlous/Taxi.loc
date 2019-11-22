@@ -21,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property string $birth_date
  * @property string $gender
  * @property string $name
+ * @property bool $admin
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password

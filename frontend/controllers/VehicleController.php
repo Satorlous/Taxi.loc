@@ -16,23 +16,8 @@ use yii\filters\VerbFilter;
 /**
  * VehicleController implements the CRUD actions for Vehicle model.
  */
-class VehicleController extends Controller
+class VehicleController extends BehaviorController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Vehicle models.
      * @return mixed

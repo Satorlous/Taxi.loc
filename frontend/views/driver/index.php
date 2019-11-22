@@ -1,7 +1,9 @@
 <?php
 
+use Symfony\Component\VarDumper\VarDumper;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\DriverSearch */
@@ -18,23 +20,30 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Driver', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
             'birth_date',
             'email:email',
             'phone',
-            //'avatar',
-            //'vehicle_id',
+            [
+                'attribute' => 'avatar',
+                'format' => 'image',
+                'value' => function($data){
+                    return Html::img('@frontend/web/uploads/'.$data->avatar);
+                },
+            ],
+            ['attribute' => 'vehicleName','label' => 'ТС', 'value'=>'vehicle.name'],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['width' => '50'],
+                'template' => '{update} {delete} {link}',
+            ],
         ],
     ]); ?>
 
